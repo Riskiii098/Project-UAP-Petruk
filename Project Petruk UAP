@@ -112,3 +112,31 @@ void transferFunds(const char* sender, const char* receiver, double amount) {
         cout << "Transfer berhasil!" << endl;
         printReceipt(sender, "Transfer ke", amount, receiver, timestamp.c_str());
     }
+
+
+void fillBalance(const char* username, double amount) {
+        accounts[username]->balance += amount;
+        string timestamp = getCurrentTime();
+        accounts[username]->addTransaction(Transaction<string>("Isi Saldo", amount, username, timestamp));
+        cout << "Isi saldo berhasil!" << endl;
+        printReceipt(username, "Isi Saldo", amount, username, timestamp.c_str());
+    }
+
+    void printReceipt(const char* username, const char* type, double amount, const char* targetAccount, const char* timestamp) {
+        cout << "Struk Transaksi: " << endl;
+        cout << "==============================" << endl;
+        cout << "Username      : " << username << endl;
+        cout << "Tipe Transaksi: " << type << endl;
+        cout << "Jumlah        : " << fixed << setprecision(2) << amount << " USD" << endl;
+        cout << "Akun Tujuan   : " << targetAccount << endl;
+        cout << "Waktu         : " << timestamp << endl;
+        cout << "==============================" << endl;
+    }
+
+    Account* getAccount(const char* username) {
+        if (accounts.find(username) != accounts.end()) {
+            return accounts[username];
+        }
+        return nullptr;
+    }
+};
