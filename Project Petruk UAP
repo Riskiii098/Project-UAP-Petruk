@@ -44,3 +44,8 @@ public:
             cout << t.timestamp << " - " << t.type << " " << t.amount << " USD ke " << t.targetAccount << endl;
         }
     }
+
+ void addTransaction(const Transaction<string>& transaction) {
+        transactions.push_back(transaction);
+    }
+};
