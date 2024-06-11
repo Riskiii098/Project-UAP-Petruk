@@ -166,3 +166,27 @@ void divideAndConquerSort(vector<Transaction<string>>& transactions, int left, i
         transactions[i] = temp[i - left];
     }
 }
+
+int main() {
+    BankSystem bank;
+    char username[20], password[20];
+    int choice;
+
+    while (true) {
+        cout << "1. Registrasi" << endl;
+        cout << "2. Login" << endl;
+        cout << "3. Keluar" << endl;
+        cout << "Pilih: ";
+        cin >> choice;
+
+        if (choice == 1) {
+            cout << "Masukkan nama pengguna: ";
+            cin >> username;
+            cout << "Masukkan kata sandi: ";
+            cin >> password;
+            bank.registerUser(username, password);
+        } else if (choice == 2) {
+            cout << "Masukkan nama pengguna: ";
+            cin >> username;
+            cout << "Masukkan kata sandi: ";
+            cin >> password;
