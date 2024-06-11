@@ -140,3 +140,29 @@ void fillBalance(const char* username, double amount) {
         return nullptr;
     }
 };
+
+void divideAndConquerSort(vector<Transaction<string>>& transactions, int left, int right) {
+    if (left >= right) return;
+
+    int mid = left + (right - left) / 2;
+    divideAndConquerSort(transactions, left, mid);
+    divideAndConquerSort(transactions, mid + 1, right);
+
+    vector<Transaction<string>> temp(right - left + 1);
+    int i = left, j = mid + 1, k = 0;
+
+    while (i <= mid && j <= right) {
+        if (transactions[i].timestamp <= transactions[j].timestamp) {
+            temp[k++] = transactions[i++];
+        } else {
+            temp[k++] = transactions[j++];
+        }
+    }
+
+    while (i <= mid) temp[k++] = transactions[i++];
+    while (j <= right) temp[k++] = transactions[j++];
+
+    for (int i = left; i <= right; ++i) {
+        transactions[i] = temp[i - left];
+    }
+}
