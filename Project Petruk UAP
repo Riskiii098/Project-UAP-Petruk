@@ -49,3 +49,29 @@ public:
         transactions.push_back(transaction);
     }
 };
+
+// Class untuk menyimpan informasi sistem bank
+class BankSystem {
+private:
+    unordered_map<string, Account*> accounts;
+
+    string getCurrentTime() {
+        time_t now = time(0);
+        tm* ltm = localtime(&now);
+        char timeStr[20];
+        sprintf(timeStr, "%04d-%02d-%02d %02d:%02d:%02d",
+                1900 + ltm->tm_year,
+                1 + ltm->tm_mon,
+                ltm->tm_mday,
+                ltm->tm_hour,
+                ltm->tm_min,
+                ltm->tm_sec);
+        return string(timeStr);
+    }
+
+public:
+    ~BankSystem() {
+        for (auto& pair : accounts) {
+            delete pair.second;
+        }
+    }
