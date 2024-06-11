@@ -20,3 +20,27 @@ public:
 
     Transaction(T t, double a, T ta, T ts) : type(t), amount(a), targetAccount(ta), timestamp(ts) {}
 };
+
+// Class untuk menyimpan informasi akun
+class Account {
+public:
+    char username[20];
+    char password[20];
+    double balance;
+    vector<Transaction<string>> transactions;
+
+    Account(const char* u, const char* p) : balance(0.0) {
+        strcpy(username, u);
+        strcpy(password, p);
+    }
+
+    void showBalance() {
+        cout << "Saldo Anda: " << fixed << setprecision(2) << balance << " USD" << endl;
+    }
+
+    void showTransactions() {
+        cout << "Riwayat Transaksi: " << endl;
+        for (const auto& t : transactions) {
+            cout << t.timestamp << " - " << t.type << " " << t.amount << " USD ke " << t.targetAccount << endl;
+        }
+    }
