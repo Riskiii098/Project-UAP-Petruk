@@ -190,3 +190,29 @@ int main() {
             cin >> username;
             cout << "Masukkan kata sandi: ";
             cin >> password;
+            if (bank.loginUser(username, password)) {
+                while (true) {
+                    cout << "1. Lihat Saldo" << endl;
+                    cout << "2. Lihat Riwayat Transaksi" << endl;
+                    cout << "3. Transfer Dana" << endl;
+                    cout << "4. Isi Saldo" << endl;
+                    cout << "5. Logout" << endl;
+                    cout << "Pilih: ";
+                    cin >> choice;
+
+                    Account* account = bank.getAccount(username);
+
+                    if (choice == 1) {
+                        account->showBalance();
+                    } else if (choice == 2) {
+                        vector<Transaction<string>>& transactions = account->transactions;
+                        divideAndConquerSort(transactions, 0, transactions.size() - 1);
+                        account->showTransactions();
+                    } else if (choice == 3) {
+                        char receiver[20];
+                        double amount;
+                        cout << "Masukkan nama akun penerima: ";
+                        cin >> receiver;
+                        cout << "Masukkan jumlah: ";
+                        cin >> amount;
+                        bank.transferFunds(username, receiver, amount);
