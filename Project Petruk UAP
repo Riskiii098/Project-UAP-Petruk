@@ -1,1 +1,22 @@
+#include <iostream>
+#include <unordered_map>
+#include <vector>
+#include <cstring>
+#include <ctime>
+#include <iomanip>
 
+using namespace std;
+
+// Class template untuk transaksi
+template<typename T>
+class Transaction {
+public:
+    T type;
+    double amount;
+    T targetAccount;
+    T timestamp;
+
+    Transaction() : amount(0.0) {}
+
+    Transaction(T t, double a, T ta, T ts) : type(t), amount(a), targetAccount(ta), timestamp(ts) {}
+};
