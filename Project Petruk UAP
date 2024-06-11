@@ -75,3 +75,21 @@ public:
             delete pair.second;
         }
     }
+
+void registerUser(const char* username, const char* password) {
+        if (accounts.find(username) != accounts.end()) {
+            cout << "Nama pengguna sudah terdaftar!" << endl;
+            return;
+        }
+        accounts[username] = new Account(username, password);
+        cout << "Registrasi berhasil!" << endl;
+    }
+
+    bool loginUser(const char* username, const char* password) {
+        if (accounts.find(username) == accounts.end() || strcmp(accounts[username]->password, password) != 0) {
+            cout << "Nama pengguna atau kata sandi salah!" << endl;
+            return false;
+        }
+        cout << "Login berhasil!" << endl;
+        return true;
+    }
