@@ -93,3 +93,22 @@ void registerUser(const char* username, const char* password) {
         cout << "Login berhasil!" << endl;
         return true;
     }
+
+void transferFunds(const char* sender, const char* receiver, double amount) {
+        if (accounts.find(receiver) == accounts.end()) {
+            cout << "Akun penerima tidak ditemukan!" << endl;
+            return;
+        }
+        if (accounts[sender]->balance < amount) {
+            cout << "Saldo tidak mencukupi!" << endl;
+            return;
+        }
+
+        accounts[sender]->balance -= amount;
+        accounts[receiver]->balance += amount;
+        string timestamp = getCurrentTime();
+        accounts[sender]->addTransaction(Transaction<string>("Transfer ke", amount, receiver, timestamp));
+        accounts[receiver]->addTransaction(Transaction<string>("Transfer dari", amount, sender, timestamp));
+        cout << "Transfer berhasil!" << endl;
+        printReceipt(sender, "Transfer ke", amount, receiver, timestamp.c_str());
+    }
