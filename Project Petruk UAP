@@ -216,3 +216,24 @@ int main() {
                         cout << "Masukkan jumlah: ";
                         cin >> amount;
                         bank.transferFunds(username, receiver, amount);
+                     }  else if (choice == 4) {
+                        double amount;
+                        cout << "Masukkan jumlah: ";
+                        cin >> amount;
+                        bank.fillBalance(username, amount);
+                    } else if (choice == 5) {
+                        break;
+                    } else {
+                        cout << "Pilihan tidak valid!" << endl;
+                    }
+                }
+            }
+        } else if (choice == 3) {
+            break;
+        } else {
+            cout << "Pilihan tidak valid!" << endl;
+        }
+    }
+
+    return 0;
+}
